@@ -1,0 +1,71 @@
+.main-menu{
+	position:absolute;
+	background-color: aquamarine;
+	top:-100%;
+}
+.main-menu--show{
+	top:0%;
+}
+.main-menu--hide{
+	top:-20px;
+}
+.animation{
+	transition-property:top;
+	transition-duration: 0.5s;
+}
+
+.menu-container{
+	position:relative;
+	
+}
+
+.menu-label{
+	position:absolute;
+	top:100%;
+	width:20px;
+	height:20px;
+	background-color: aquamarine;
+}
+
+.wideModal .modal-dialog {
+	width: 70%;
+}
+
+.narrowModal .modal-dialog {
+	width: 30%;
+}
+.group{
+	display: inline-block;
+}
+
+.answerContainer{
+	margin-bottom:10px;
+}
+.show-answer-label{
+	font-weight:normal;
+}
+
+#resultVisualisation{
+	margin-top:10px;
+}
+
+.contentContainer{
+	margin:10px;
+}
+
+.groupContainer { 
+	transition-duration: 1s;
+}
+.changeBColour:hover { /* цвет при наведении */
+	background-color: rgba(192, 205, 221, 0.33);
+}
+
+table { 
+	transition-duration: 1s;
+	title="Кликните для начала теста по словам из таблицы";
+}
+
+table:hover { /* цвет при наведении */
+
+background-color: rgba(192, 205, 221, 0.33);
+}
