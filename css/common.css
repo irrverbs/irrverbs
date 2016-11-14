@@ -1,7 +1,7 @@
 .main-menu{
-	position:absolute;
-	background-color: aquamarine;
+	position:fixed;
 	top:-100%;
+	background-color:white;
 }
 .main-menu--show{
 	top:0%;
@@ -21,10 +21,10 @@
 
 .menu-label{
 	position:absolute;
+	display:block;
 	top:100%;
 	width:20px;
 	height:20px;
-	background-color: aquamarine;
 }
 
 .wideModal .modal-dialog {
