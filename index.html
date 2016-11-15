@@ -14,11 +14,11 @@
 <body>
 	<div class="main-menu animation">
 		<div class="menu-container">
-			<a href="#" class="menu-link" data-url="irrverb.html">Неправильные глаголы. Первый вариант группировки</a>
+			<a href="#" class="menu-link" data-url="/content/irrverb.html">Неправильные глаголы. Первый вариант группировки</a>
 			<br>
-			<a href="#" class="menu-link" data-url="irrverborder.html">Неправильные глаголы. Второй вариант группировки</a>
+			<a href="#" class="menu-link" data-url="/content/irrverborder.html">Неправильные глаголы. Второй вариант группировки</a>
 			<br>
-			<a href="#" class="menu-link" data-url="periodicals.html">Периодика</a>
+			<a href="#" class="menu-link" data-url="/content/periodicals.html">Периодика</a>
 			<div class="menu-label glyphicon glyphicon-menu-hamburger"></div>
 		</div>
 	</div>
@@ -59,6 +59,39 @@
 			<div>
 				<input id ="showAnswer" type="checkbox" checked="checked">
 				<label for="showAnswer" class="show-answer-label">Показать ответ</label>
+			</div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+ 
+   <div class="modal fade wideModal" id="DicQuizModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title, text-center">Тест</h3>
+		  <h5 class="modal-title, text-center" id="verbsFrom"></h5>
+		  <h5 class="modal-title, text-center">Введите ответ и нажмите Enter</h5>
+        </div>
+        <div class="modal-body, text-center">
+		<div class="answerContainer">
+			<div class='group'>
+			  <label for="translation">Translation</label><br />
+			  <input id='translation'></input>
+			</div>
+			<div class='group'>
+			  <label for="original">Original</label><br />
+			  <input id='original'></input>
+			</div>
+			<div id="resultVisualisation">
+			</div>
+        </div>
+        <div class="modal-footer">
+			<div>
+				<input id ="showAnswerD" type="checkbox" checked="checked">
+				<label for="showAnswerD" class="show-answer-label">Показать ответ</label>
 			</div>
         </div>
       </div>
