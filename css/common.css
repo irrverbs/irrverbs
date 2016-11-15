@@ -69,3 +69,14 @@ table:hover { /* цвет при наведении */
 
 background-color: rgba(192, 205, 221, 0.33);
 }
+/* .clearfix:after{
+	content:"";
+	display:table;
+	clear:both;
+} */
+.clearfix{
+    width: 50%;
+}
+.periodicaly-column{
+	display:inline-block;
+}

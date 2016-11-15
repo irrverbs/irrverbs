@@ -12,7 +12,25 @@ $(document).ready(function(){
 		event.currentTarget.style.top="-"+height+"px";
 	})	
 	
-	
+	var menuLinks = document.querySelectorAll(".menu-link");
+	Array.from(menuLinks).forEach(link => {
+		link.addEventListener('click', function(event) {
+			event.preventDefault();
+			var url = event.currentTarget.dataset.url;
+			$.ajax({
+				url:url,
+				dataType: 'html',
+				success: function(html){
+					$('.contentContainer').html(html);
+					initializeTable();
+				}
+			});
+		});
+	});	
+	menuLinks[0].click();
+});
+function initializeTable()
+{
 	var tables=document.querySelectorAll('table');
 	for(i=0;i<tables.length;i++)
 	{
@@ -53,7 +71,7 @@ $(document).ready(function(){
 		quiz.Check();}
 	}
 	
-});
+};
   
 function GroupClick(Group)
 {
