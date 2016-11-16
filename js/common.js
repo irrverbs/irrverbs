@@ -35,6 +35,15 @@ $(document).ready(function(){
 });
 function initialize(dictionaryProcessor,irrVerbsProcessor)
 {
+	var cells=document.querySelectorAll('.pronounce');
+	Array.from(cells).forEach(cell => {
+		cell.addEventListener('click', function(event) {
+			event.stopPropagation()
+			responsiveVoice.speak(cell.innerText);
+	
+		});
+	});
+	
 	initializeTable(dictionaryProcessor,irrVerbsProcessor);
 	initializeGroup(dictionaryProcessor,irrVerbsProcessor);
 };
@@ -43,6 +52,8 @@ function initializeTable(dictionaryProcessor,irrVerbsProcessor){
 	var tables=document.querySelectorAll('table');
 	Array.from(tables).forEach(table => {
 		table.addEventListener('click', function(event) {
+			if(event.currentTarget.classList.contains("word"))
+				return;
 			event.preventDefault();
 			var columnNumber = table.querySelector('tr').querySelectorAll('th').length;
 			switch (columnNumber) {
@@ -55,8 +66,6 @@ function initializeTable(dictionaryProcessor,irrVerbsProcessor){
 			  default:
 				alert( 'Неверное число столбцов!' );
 				}
-			var verbFrom=document.getElementById('verbsFrom');
-			verbFrom.innerText="Глаголы из выбранной таблицы";
 		});
 	});	
 }
@@ -77,8 +86,6 @@ function initializeGroup(dictionaryProcessor,irrVerbsProcessor){
 			
 		group.addEventListener('click', function(event) {
 			event.preventDefault();
-			var verbFrom=document.getElementById('verbsFrom');
-			verbFrom.innerText="Глаголы из выбранной таблицы";
 			var columnNumber = group.parentNode.querySelector('table').querySelector('tr').querySelectorAll('th').length;
 			switch (columnNumber) {
 			  case 2:
@@ -116,7 +123,7 @@ function ClickProcessor()
 		var rowData=[];
 		for(var i=0;i<cells.length;i++)
 		{
-			rowData.push(cells[i].innerHTML)
+			rowData.push(cells[i].innerText.replace(/\n/g,", "));
 		}
 		return rowData;
 	};
@@ -135,6 +142,9 @@ function ClickProcessor()
 function DictionaryProcessor()
 {
 	this.tableClick = function (table){
+		var wordsFrom=document.getElementById('wordsFrom');
+		wordsFrom.innerText="Слова из выбранной таблицы";	
+		
 		var words=this.getDataFromTable(table)
 		var quiz= new DictQuiz(words,'DicQuizModal','ResultModal');
 		this.initializeQuizModal(quiz,"DicQuizModal");
@@ -142,6 +152,9 @@ function DictionaryProcessor()
 	}
 	
 	this.groupClick=function(group){
+		var wordsFrom=document.getElementById('wordsFrom');
+		wordsFrom.innerText=group.querySelector(".groupTitle").innerText
+		
 		var words=this.getGroupData(group);
 		var quiz= new DictQuiz(words,'DicQuizModal','ResultModal');
 		this.initializeQuizModal(quiz,"DicQuizModal");
@@ -183,6 +196,9 @@ function IrrVerbsProcessor()
 {
 
 	this.tableClick = function (table){
+		var verbsFrom=document.getElementById('verbsFrom');
+		verbsFrom.innerText="Глаголы из выбранной таблицы";
+		
 		var verbs=this.getDataFromTable(table)
 		var quiz= new VerbQuiz(verbs,'QuizModal','ResultModal');
 		this.initializeQuizModal(quiz,"QuizModal");
@@ -190,6 +206,9 @@ function IrrVerbsProcessor()
 	}
 	
 	this.groupClick=function(group){
+		var verbsFrom=document.getElementById('verbsFrom');
+		verbsFrom.innerText=group.querySelector(".groupTitle").innerText
+		
 		var verbs=this.getGroupData(group);
 		var quiz= new VerbQuiz(verbs,'QuizModal','ResultModal');
 		this.initializeQuizModal(quiz,"QuizModal");
@@ -284,6 +303,7 @@ function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
 	
 	this.Show=function()
 	{	
+		clear();
 		if(verbs.length>0)
 		{
 			update();
@@ -363,7 +383,7 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 	function update()
 	{
 		currentVerbNumber=random(words.length-1);
-		translationField.value=words[currentVerbNumber].Translation;
+		translationField.value=words[currentVerbNumber].Translation.replace(/<br>/g, ", " );
 	}
 	
 	function clear()
@@ -374,6 +394,7 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 	
 	this.Show=function()
 	{	
+		clear();
 		if(words.length>0)
 		{
 			update();

@@ -59,10 +59,11 @@
 .changeBColour:hover { /* цвет при наведении */
 	background-color: rgba(192, 205, 221, 0.33);
 }
-
+.pronounce{
+	cursor:pointer;
+}
 table { 
 	transition-duration: 1s;
-	title="Кликните для начала теста по словам из таблицы";
 }
 
 table:hover { /* цвет при наведении */
@@ -71,4 +72,7 @@ background-color: rgba(192, 205, 221, 0.33);
 }
 .column{
 	display:inline-block;
+	width:49%;
+	padding-left:10px;
+	padding-right:10px;
 }
