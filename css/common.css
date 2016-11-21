@@ -62,6 +62,22 @@
 .pronounce{
 	cursor:pointer;
 }
+.modal-pronounce-value{
+	display:none;
+}
+.pronounce-container{
+	float:left;
+	font-size:small;
+	cursor:pointer;
+}
+.answer-dict-container{
+	float:right;
+}
+.clearfix{
+	content:"";
+	display:table;
+	clear:both;
+}
 table { 
 	transition-duration: 1s;
 }

@@ -31,6 +31,13 @@ $(document).ready(function(){
 			});
 		});
 	});	
+	
+	var modalPronounce= document.querySelector('#modalPronounceIcon');
+	modalPronounce.addEventListener('click', function(event) {
+		event.stopPropagation();
+		var pronounceValue=document.querySelector('#modalPronounceValue').innerHTML;
+		responsiveVoice.speak(pronounceValue);
+	});
 	menuLinks[0].click();
 });
 function initialize(dictionaryProcessor,irrVerbsProcessor)
@@ -363,6 +370,7 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 	var translationField=modal.querySelector('#translation');
 	var originalField=modal.querySelector('#original');
 	var visualiseResult=modal.querySelector('#resultVisualisation');
+	var pronounceValue=modal.querySelector('#modalPronounceValue');
 	
 	var modalResult=document.getElementById(ModalResultId);
 	var resultRight=modalResult.querySelector('#right');
@@ -384,6 +392,7 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 	{
 		currentVerbNumber=random(words.length-1);
 		translationField.value=words[currentVerbNumber].Translation.replace(/<br>/g, ", " );
+		pronounceValue.innerHTML=words[currentVerbNumber].Original;
 	}
 	
 	function clear()
@@ -419,7 +428,7 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 		{
 			error++;
 			visualiseResult.style.color='red';
-			if($('#showAnswerD').prop('checked'))
+			if($('#showAnswerDict').prop('checked'))
 				visualiseResult.innerText= words[currentVerbNumber].Original;
 			else
 				visualiseResult.innerText="Неверно!"
