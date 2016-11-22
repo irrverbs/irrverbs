@@ -16,7 +16,6 @@
 
 .menu-container{
 	position:relative;
-	
 }
 
 .menu-label{
@@ -45,7 +44,7 @@
 	font-weight:normal;
 }
 
-#resultVisualisation{
+.resultVisualisation{
 	margin-top:10px;
 }
 
@@ -65,15 +64,22 @@
 .modal-pronounce-value{
 	display:none;
 }
-.pronounce-container{
-	float:left;
-	font-size:small;
+.result-value{
+	display:inline-block;
+/* 	font-size:small; */
+}
+.modal-pronounce-icon{
+/* 	font-size:small; */
 	cursor:pointer;
+	display:inline-block;	
 }
 .answer-dict-container{
 	float:right;
 }
-.clearfix{
+.counter{
+	float:left;
+}
+.clearfix:after{
 	content:"";
 	display:table;
 	clear:both;

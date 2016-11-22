@@ -38,6 +38,13 @@ $(document).ready(function(){
 		var pronounceValue=document.querySelector('#modalPronounceValue').innerHTML;
 		responsiveVoice.speak(pronounceValue);
 	});
+	var resultPronounce= document.querySelector('#resultIcon');
+	resultPronounce.addEventListener('click', function(event) {
+		event.stopPropagation();
+		var pronounceValue=document.querySelector('#resultValue').innerHTML;
+		responsiveVoice.speak(pronounceValue);
+	});
+	
 	menuLinks[0].click();
 });
 function initialize(dictionaryProcessor,irrVerbsProcessor)
@@ -283,6 +290,9 @@ function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
 	var resultWrong=modalResult.querySelector('#wrong');
 	var resultPercent=modalResult.querySelector('#percent');
 	
+	var verbDone=modal.querySelector("#verbDone");
+	var verbAll=modal.querySelector("#verbAll");
+	
 	var currentVerbNumber;
 	var correct=0;
 	var error=0;
@@ -298,6 +308,7 @@ function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
 	{
 		currentVerbNumber=random(verbs.length-1);
 		translationField.value=verbs[currentVerbNumber].Translation;
+		verbDone.innerHTML = VerbsList.length - verbs.length;		
 	}
 	
 	function clear()
@@ -311,6 +322,7 @@ function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
 	this.Show=function()
 	{	
 		clear();
+		verbAll.innerHTML = VerbsList.length;		
 		if(verbs.length>0)
 		{
 			update();
@@ -331,7 +343,6 @@ function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
 			verbs.splice(currentVerbNumber,1);
 			visualiseResult.style.color='green';
 			visualiseResult.innerText="Верно!"
-			
 		}
 		else
 		{
@@ -369,8 +380,11 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 	var modal=document.getElementById(ModalQuizId);
 	var translationField=modal.querySelector('#translation');
 	var originalField=modal.querySelector('#original');
-	var visualiseResult=modal.querySelector('#resultVisualisation');
+	var visualiseResult=modal.querySelector('#resultValue');
+	var resultSpeaker = modal.querySelector('.resultVisualisation .modal-pronounce-icon');
 	var pronounceValue=modal.querySelector('#modalPronounceValue');
+	var wordDone=modal.querySelector("#wordDone");
+	var wordAll=modal.querySelector("#wordAll");
 	
 	var modalResult=document.getElementById(ModalResultId);
 	var resultRight=modalResult.querySelector('#right');
@@ -393,6 +407,7 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 		currentVerbNumber=random(words.length-1);
 		translationField.value=words[currentVerbNumber].Translation.replace(/<br>/g, ", " );
 		pronounceValue.innerHTML=words[currentVerbNumber].Original;
+		wordDone.innerHTML = WordList.length - words.length;
 	}
 	
 	function clear()
@@ -404,10 +419,12 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 	this.Show=function()
 	{	
 		clear();
+		wordAll.innerHTML = WordList.length;
 		if(words.length>0)
 		{
 			update();
 			visualiseResult.innerText="";
+			resultSpeaker.style.display = 'none';
 			$('#'+ModalQuizId).on('shown.bs.modal', function () {
 				original.focus();});
 			$('#'+ModalQuizId).modal('show');
@@ -422,14 +439,17 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 			words.splice(currentVerbNumber,1);
 			visualiseResult.style.color='green';
 			visualiseResult.innerText="Верно!"
-			
+			resultSpeaker.style.display = 'none';
 		}
 		else
 		{
 			error++;
 			visualiseResult.style.color='red';
 			if($('#showAnswerDict').prop('checked'))
+			{
 				visualiseResult.innerText= words[currentVerbNumber].Original;
+				resultSpeaker.style.display = 'inline-block';
+			}
 			else
 				visualiseResult.innerText="Неверно!"
 		}
@@ -446,7 +466,6 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 			resultPercent.innerText=Math.round((correct/(correct+error))*100)+"%";
 			$('#'+ModalQuizId).modal('hide');
 			setTimeout(function(){$('#'+ModalResultId).modal('show');},400)
-			
 		}
 	}
 }
