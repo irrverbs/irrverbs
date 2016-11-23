@@ -27,6 +27,7 @@ $(document).ready(function(){
 				success: function(html){
 					$('.contentContainer').html(html);
 					initialize(dictionaryProcessor,irrVerbsProcessor);
+					$("html, body").animate({ scrollTop: 0 }, "500");
 				}
 			});
 		});
@@ -52,7 +53,7 @@ function initialize(dictionaryProcessor,irrVerbsProcessor)
 	var cells=document.querySelectorAll('.pronounce');
 	Array.from(cells).forEach(cell => {
 		cell.addEventListener('click', function(event) {
-			event.stopPropagation()
+			event.stopPropagation();
 			responsiveVoice.speak(cell.innerText);
 	
 		});
@@ -103,10 +104,10 @@ function initializeGroup(dictionaryProcessor,irrVerbsProcessor){
 			var columnNumber = group.parentNode.querySelector('table').querySelector('tr').querySelectorAll('th').length;
 			switch (columnNumber) {
 			  case 2:
-				dictionaryProcessor.groupClick(event.currentTarget.parentNode);
+				dictionaryProcessor.groupClick(event.currentTarget.parentNode,event.currentTarget);
 				break;
 			  case 4:
-				irrVerbsProcessor.groupClick(event.currentTarget.parentNode);
+				irrVerbsProcessor.groupClick(event.currentTarget.parentNode,event.currentTarget);
 				break;
 			  default:
 				alert( 'Неверное число столбцов!' );
@@ -161,15 +162,15 @@ function DictionaryProcessor()
 			
 	this.tableClick = function (table){
 		wordsFrom.innerText="Слова из выбранной таблицы";	
-		var words=this.getDataFromTable(table)
+		var words=this.getDataFromTable(table);
 		quiz.SetWords(words);
 		quiz.Show();
 	}
 	
-	this.groupClick=function(group){
-		wordsFrom.innerText=group.querySelector(".groupTitle").innerText
+	this.groupClick=function(group,groupTitle){
+		wordsFrom.innerText=groupTitle.innerText;
 		var words=this.getGroupData(group);
-		quiz.SetWodrs(words);
+		quiz.SetWords(words);
 		quiz.Show();
 	}
 	
@@ -181,7 +182,7 @@ function DictionaryProcessor()
 		{
 			var data = this.getDataFormRow(rows[i]);
 			var word = new Word(data[0],data[1]);
-			words.push(word)
+			words.push(word);
 		}
 		return words;		
 	};
@@ -197,7 +198,7 @@ function DictionaryProcessor()
 			{
 				var data = this.getDataFormRow(rows[i]);
 				var word = new Word(data[0],data[1]);
-				words.push(word)
+				words.push(word);
 			}
 		}
 		return words;
@@ -212,13 +213,13 @@ function IrrVerbsProcessor()
 
 	this.tableClick = function (table){
 		verbsFrom.innerText="Глаголы из выбранной таблицы";
-		var verbs=this.getDataFromTable(table)
+		var verbs=this.getDataFromTable(table);
 		quiz.SetVerbsList(verbs);
 		quiz.Show();
 	}
 	
-	this.groupClick=function(group){
-		verbsFrom.innerText=group.querySelector(".groupTitle").innerText
+	this.groupClick=function(group,groupTitle){
+		verbsFrom.innerText=groupTitle.innerText;
 		var verbs=this.getGroupData(group);
 		quiz.SetVerbsList(verbs);
 		quiz.Show();
@@ -232,7 +233,7 @@ function IrrVerbsProcessor()
 		{
 			var data = this.getDataFormRow(rows[i]);
 			var verb=new IrrVerb(data[0],data[1],data[2],data[3]);
-			verbs.push(verb)
+			verbs.push(verb);
 		}
 		return verbs;		
 	};
@@ -248,7 +249,7 @@ function IrrVerbsProcessor()
 			{
 				var data = this.getDataFormRow(rows[i]);
 				var verb=new IrrVerb(data[0],data[1],data[2],data[3]);
-				verbs.push(verb)
+				verbs.push(verb);
 			}
 		}
 		return verbs;
@@ -295,7 +296,7 @@ function VerbQuiz(ModalQuizId, ModalResultId)
 	
 	function random(maxValue)
 	{
-		var rand = Math.random() * (maxValue)
+		var rand = Math.random() * (maxValue);
 		rand = Math.round(rand);
 		return rand;
 	}
@@ -318,7 +319,7 @@ function VerbQuiz(ModalQuizId, ModalResultId)
 	this.SetVerbsList= function(VerbsList)
 	{
 		verbsList=VerbsList;
-		verbs =Array.prototype.slice.call(verbsList)		
+		verbs =Array.prototype.slice.call(verbsList);		
 	}
 	
 	this.Show=function()
@@ -344,7 +345,7 @@ function VerbQuiz(ModalQuizId, ModalResultId)
 			correct++;
 			verbs.splice(currentVerbNumber,1);
 			visualiseResult.style.color='green';
-			visualiseResult.innerText="Верно!"
+			visualiseResult.innerText="Верно!";
 		}
 		else
 		{
@@ -355,7 +356,7 @@ function VerbQuiz(ModalQuizId, ModalResultId)
 										   verbs[currentVerbNumber].PastTense+" "+
 										   verbs[currentVerbNumber].PastParticiple;
 			else
-				visualiseResult.innerText="Неверно!"
+				visualiseResult.innerText="Неверно!";
 		}
 		clear();
 		infinitiveField.focus();
@@ -369,7 +370,7 @@ function VerbQuiz(ModalQuizId, ModalResultId)
 			resultWrong.innerText="Неверно: "+error;
 			resultPercent.innerText=Math.round((correct/(correct+error))*100)+"%";
 			$('#'+ModalQuizId).modal('hide');
-			setTimeout(function(){$('#'+ModalResultId).modal('show');},400)
+			setTimeout(function(){$('#'+ModalResultId).modal('show');},400);
 			
 		}
 	}
@@ -377,7 +378,7 @@ function VerbQuiz(ModalQuizId, ModalResultId)
 
 function DictQuiz(ModalQuizId, ModalResultId)
 {
-	var wordsList=[]
+	var wordsList=[];
 	var words =[];
 	
 	var modal=document.getElementById(ModalQuizId);
@@ -400,7 +401,7 @@ function DictQuiz(ModalQuizId, ModalResultId)
 	
 	function random(maxValue)
 	{
-		var rand = Math.random() * (maxValue)
+		var rand = Math.random() * (maxValue);
 		rand = Math.round(rand);
 		return rand;
 	}
@@ -422,7 +423,7 @@ function DictQuiz(ModalQuizId, ModalResultId)
 	this.SetWords=function(WordsList)
 	{
 		wordsList=WordsList;
-		words =Array.prototype.slice.call(wordsList)		
+		words =Array.prototype.slice.call(wordsList);
 	}
 	
 	this.Show=function()
@@ -447,7 +448,7 @@ function DictQuiz(ModalQuizId, ModalResultId)
 			correct++;
 			words.splice(currentVerbNumber,1);
 			visualiseResult.style.color='green';
-			visualiseResult.innerText="Верно!"
+			visualiseResult.innerText="Верно!";
 			resultSpeaker.style.display = 'none';
 		}
 		else
@@ -460,7 +461,10 @@ function DictQuiz(ModalQuizId, ModalResultId)
 				resultSpeaker.style.display = 'inline-block';
 			}
 			else
-				visualiseResult.innerText="Неверно!"
+			{
+				visualiseResult.innerText="Неверно!";
+				resultSpeaker.style.display = 'none';
+			}
 		}
 		clear();
 		originalField.focus();
@@ -474,7 +478,7 @@ function DictQuiz(ModalQuizId, ModalResultId)
 			resultWrong.innerText="Неверно: "+error;
 			resultPercent.innerText=Math.round((correct/(correct+error))*100)+"%";
 			$('#'+ModalQuizId).modal('hide');
-			setTimeout(function(){$('#'+ModalResultId).modal('show');},400)
+			setTimeout(function(){$('#'+ModalResultId).modal('show');},400);
 		}
 	}
 }
