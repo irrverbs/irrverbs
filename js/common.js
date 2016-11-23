@@ -155,23 +155,21 @@ function ClickProcessor()
 
 function DictionaryProcessor()
 {
+	var quiz= new DictQuiz('DicQuizModal','ResultModal');
+	this.initializeQuizModal(quiz,"DicQuizModal");
+	var wordsFrom=document.getElementById('wordsFrom');	
+			
 	this.tableClick = function (table){
-		var wordsFrom=document.getElementById('wordsFrom');
 		wordsFrom.innerText="Слова из выбранной таблицы";	
-		
 		var words=this.getDataFromTable(table)
-		var quiz= new DictQuiz(words,'DicQuizModal','ResultModal');
-		this.initializeQuizModal(quiz,"DicQuizModal");
+		quiz.SetWords(words);
 		quiz.Show();
 	}
 	
 	this.groupClick=function(group){
-		var wordsFrom=document.getElementById('wordsFrom');
 		wordsFrom.innerText=group.querySelector(".groupTitle").innerText
-		
 		var words=this.getGroupData(group);
-		var quiz= new DictQuiz(words,'DicQuizModal','ResultModal');
-		this.initializeQuizModal(quiz,"DicQuizModal");
+		quiz.SetWodrs(words);
 		quiz.Show();
 	}
 	
@@ -208,24 +206,21 @@ function DictionaryProcessor()
 }
 function IrrVerbsProcessor()
 {
+	var quiz= new VerbQuiz('QuizModal','ResultModal');
+	this.initializeQuizModal(quiz,"QuizModal");	
+	var verbsFrom=document.getElementById('verbsFrom');	
 
 	this.tableClick = function (table){
-		var verbsFrom=document.getElementById('verbsFrom');
 		verbsFrom.innerText="Глаголы из выбранной таблицы";
-		
 		var verbs=this.getDataFromTable(table)
-		var quiz= new VerbQuiz(verbs,'QuizModal','ResultModal');
-		this.initializeQuizModal(quiz,"QuizModal");
+		quiz.SetVerbsList(verbs);
 		quiz.Show();
 	}
 	
 	this.groupClick=function(group){
-		var verbsFrom=document.getElementById('verbsFrom');
 		verbsFrom.innerText=group.querySelector(".groupTitle").innerText
-		
 		var verbs=this.getGroupData(group);
-		var quiz= new VerbQuiz(verbs,'QuizModal','ResultModal');
-		this.initializeQuizModal(quiz,"QuizModal");
+		quiz.SetVerbsList(verbs);
 		quiz.Show();
 	}
 	
@@ -274,9 +269,10 @@ function Word(Original,Translation)
 	this.Translation=Translation;
 }
 
-function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
+function VerbQuiz(ModalQuizId, ModalResultId)
 {
-	var verbs =Array.prototype.slice.call(VerbsList)
+	var verbsList=[];
+	var verbs =[];
 	
 	var modal=document.getElementById(ModalQuizId);
 	var translationField=modal.querySelector('#translation');
@@ -308,7 +304,7 @@ function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
 	{
 		currentVerbNumber=random(verbs.length-1);
 		translationField.value=verbs[currentVerbNumber].Translation;
-		verbDone.innerHTML = VerbsList.length - verbs.length;		
+		verbDone.innerHTML = verbsList.length - verbs.length;		
 	}
 	
 	function clear()
@@ -319,10 +315,16 @@ function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
 		pastParticipleField.value="";
 	}
 	
+	this.SetVerbsList= function(VerbsList)
+	{
+		verbsList=VerbsList;
+		verbs =Array.prototype.slice.call(verbsList)		
+	}
+	
 	this.Show=function()
 	{	
 		clear();
-		verbAll.innerHTML = VerbsList.length;		
+		verbAll.innerHTML = verbsList.length;		
 		if(verbs.length>0)
 		{
 			update();
@@ -373,9 +375,10 @@ function VerbQuiz(VerbsList,ModalQuizId, ModalResultId)
 	}
 }
 
-function DictQuiz(WordList,ModalQuizId, ModalResultId)
+function DictQuiz(ModalQuizId, ModalResultId)
 {
-	var words =Array.prototype.slice.call(WordList)
+	var wordsList=[]
+	var words =[];
 	
 	var modal=document.getElementById(ModalQuizId);
 	var translationField=modal.querySelector('#translation');
@@ -407,7 +410,7 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 		currentVerbNumber=random(words.length-1);
 		translationField.value=words[currentVerbNumber].Translation.replace(/<br>/g, ", " );
 		pronounceValue.innerHTML=words[currentVerbNumber].Original;
-		wordDone.innerHTML = WordList.length - words.length;
+		wordDone.innerHTML = wordsList.length - words.length;
 	}
 	
 	function clear()
@@ -416,10 +419,16 @@ function DictQuiz(WordList,ModalQuizId, ModalResultId)
 		originalField.value="";
 	}
 	
+	this.SetWords=function(WordsList)
+	{
+		wordsList=WordsList;
+		words =Array.prototype.slice.call(wordsList)		
+	}
+	
 	this.Show=function()
 	{	
 		clear();
-		wordAll.innerHTML = WordList.length;
+		wordAll.innerHTML = wordsList.length;
 		if(words.length>0)
 		{
 			update();
