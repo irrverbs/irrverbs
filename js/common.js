@@ -325,6 +325,8 @@ function VerbQuiz(ModalQuizId, ModalResultId)
 	this.Show=function()
 	{	
 		clear();
+		correct=0;
+		error=0;		
 		verbAll.innerHTML = verbsList.length;		
 		if(verbs.length>0)
 		{
@@ -429,6 +431,8 @@ function DictQuiz(ModalQuizId, ModalResultId)
 	this.Show=function()
 	{	
 		clear();
+		correct=0;
+		error=0;
 		wordAll.innerHTML = wordsList.length;
 		if(words.length>0)
 		{

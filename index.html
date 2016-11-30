@@ -1,153 +1,151 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/common.css">
-
-	<script src="js/jquery-1.12.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>	
-</head>
-<body>
-	<div class="main-menu animation">
-		<div class="menu-container">
-			<a href="#" class="menu-link" data-url="/content/irrverb.html">Неправильные глаголы. Первый вариант группировки</a>
-			<br>
-			<a href="#" class="menu-link" data-url="/content/irrverborder.html">Неправильные глаголы. Второй вариант группировки</a>
-			<br>
-			<a href="#" class="menu-link" data-url="/content/periodicals.html">Периодика</a>
-			<br>
-			<a href="#" class="menu-link" data-url="/content/hp.html">HP</a>			
-			<div class="menu-label glyphicon glyphicon-menu-hamburger"></div>
+	<head>
+		<meta charset="UTF-8">
+		<title>MyDictionaries</title>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/common.css">
+	</head>
+	<body>
+		<div class="main-menu animation">
+			<div class="menu-container">
+				<a href="#" class="menu-link" data-url="/content/irrverb.html">Неправильные глаголы. Первый вариант группировки</a>
+				<br>
+				<a href="#" class="menu-link" data-url="/content/irrverborder.html">Неправильные глаголы. Второй вариант группировки</a>
+				<br>
+				<a href="#" class="menu-link" data-url="/content/periodicals.html">Периодика</a>
+				<br>
+				<a href="#" class="menu-link" data-url="/content/hp.html">HP</a>			
+				<div class="menu-label glyphicon glyphicon-menu-hamburger"></div>
+			</div>
 		</div>
-	</div>
-	<div class="contentContainer">
-	</div>
+		<div class="contentContainer"></div>
 
-  <div class="modal fade wideModal" id="QuizModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title, text-center">Тест</h3>
-		  <h5 class="modal-title, text-center" id="verbsFrom"></h5>
-		  <h5 class="modal-title, text-center">Введите ответ и нажмите Enter</h5>
-        </div>
-        <div class="modal-body, text-center">
-		<div class="answerContainer">
-			<div class='group'>
-			  <label for="translation">Translation</label><br />
-			  <input id='translation'></input>
-			</div>
-			<div class='group'>
-			  <label for="infinitive">Infinitive</label><br />
-			  <input id='infinitive'></input>
-			</div>
-			<div class='group'>
-			  <label for="pastTense">Past Tense</label><br />
-			  <input id='pastTense'></input>
-			</div>
-			<div class='group'>
-			  <label for="pastParticiple">Past Participle</label><br />
-			  <input id='pastParticiple'></input>
-			</div>
-			<div id="resultVisualisation" class="resultVisualisation">
-			</div>
-        </div>
-        <div class="modal-footer">
-			<div class="clearfix">
-				<div class="counter">
-					<span id="verbDone"></span>
-					<span>/</span>
-					<span id="verbAll"></span>				
-				</div>
-				<div class="answer-dict-container">
-					<input id ="showAnswer" type="checkbox" checked="checked">
-					<label for="showAnswer" class="show-answer-label">Показать ответ</label>
-				</div>
-			</div>
-        </div>
-      </div>
-    </div>
-  </div>
- </div>
- 
-   <div class="modal fade wideModal" id="DicQuizModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title, text-center">Тест</h3>
-		  <h5 class="modal-title, text-center" id="wordsFrom"></h5>
-		  <h5 class="modal-title, text-center">Введите ответ и нажмите Enter</h5>
-        </div>
-        <div class="modal-body, text-center">
-		<div class="answerContainer">
-			<div class='group'>
-			  <label for="translation">Translation</label><br />
-			  <input id='translation'></input>
-			</div>
-			<div class='group'>
-			  <label for="original">Original</label><br />
-			  <input id='original'></input>
-			</div>
-			<div class="group">
-				<div class="modal-pronounce-value">
-					<span id="modalPronounceValue"></span>
-				</div>
-				<div class="modal-pronounce-icon">
-					<span id="modalPronounceIcon">&#128266;</span>
-				</div>
-			</div>	
-			<div class="resultVisualisation">
-				<div class="result-value">
-					<span id="resultValue"></span>
-				</div>
-				<div class="modal-pronounce-icon">
-					<span id="resultIcon">&#128266;</span>
+		<div class="modal fade wideModal" id="QuizModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title, text-center">Тест</h3>
+						<h5 class="modal-title, text-center" id="verbsFrom"></h5>
+						<h5 class="modal-title, text-center">Введите ответ и нажмите Enter</h5>
+					</div>
+					<div class="modal-body, text-center">
+						<div class="answerContainer">
+							<div class='group'>
+							  <label for="translation">Translation</label><br />
+							  <input id='translation'></input>
+							</div>
+							<div class='group'>
+							  <label for="infinitive">Infinitive</label><br />
+							  <input id='infinitive'></input>
+							</div>
+							<div class='group'>
+							  <label for="pastTense">Past Tense</label><br />
+							  <input id='pastTense'></input>
+							</div>
+							<div class='group'>
+							  <label for="pastParticiple">Past Participle</label><br />
+							  <input id='pastParticiple'></input>
+							</div>
+							<div id="resultVisualisation" class="resultVisualisation">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="clearfix">
+								<div class="counter">
+									<span id="verbDone"></span>
+									<span>/</span>
+									<span id="verbAll"></span>				
+								</div>
+								<div class="answer-dict-container">
+									<input id ="showAnswer" type="checkbox" checked="checked">
+									<label for="showAnswer" class="show-answer-label">Показать ответ</label>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-        </div>
-        <div class="modal-footer">
-			<div class="clearfix">
-				<div class="counter">
-					<span id="wordDone"></span>
-					<span>/</span>
-					<span id="wordAll"></span>				
-				</div>
-				<div class="answer-dict-container">
-					<input id ="showAnswerDict" type="checkbox" checked="checked">
-					<label for="showAnswerDict" class="show-answer-label">Показать ответ</label>
+		</div>
+	 
+		<div class="modal fade wideModal" id="DicQuizModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					  <h3 class="modal-title, text-center">Тест</h3>
+					  <h5 class="modal-title, text-center" id="wordsFrom"></h5>
+					  <h5 class="modal-title, text-center">Введите ответ и нажмите Enter</h5>
+					</div>
+					<div class="modal-body, text-center">
+						<div class="answerContainer">
+							<div class='group'>
+							  <label for="translation">Translation</label><br />
+							  <input id='translation'></input>
+							</div>
+							<div class='group'>
+							  <label for="original">Original</label><br />
+							  <input id='original'></input>
+							</div>
+							<div class="group">
+								<div class="modal-pronounce-value">
+									<span id="modalPronounceValue"></span>
+								</div>
+								<div class="modal-pronounce-icon">
+									<span id="modalPronounceIcon">&#128266;</span>
+								</div>
+							</div>	
+							<div class="resultVisualisation">
+								<div class="result-value">
+									<span id="resultValue"></span>
+								</div>
+								<div class="modal-pronounce-icon">
+									<span id="resultIcon">&#128266;</span>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="clearfix">
+								<div class="counter">
+									<span id="wordDone"></span>
+									<span>/</span>
+									<span id="wordAll"></span>				
+								</div>
+								<div class="answer-dict-container">
+									<input id ="showAnswerDict" type="checkbox" checked="checked">
+									<label for="showAnswerDict" class="show-answer-label">Показать ответ</label>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-        </div>
-      </div>
-    </div>
-  </div>
- </div>
- 
-  <div class="modal fade narrowModal" id="ResultModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title, text-center">Результат</h4>
-        </div>
-        <div class="modal-body, text-center">
-		<label id='right'></label><br>
-		<label id ='wrong'></label><br>
-		<label id ='percent'></label>		
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
- </div>
-</body>
-<script src="js/common.js"></script>
+		</div>
+	 
+		<div class="modal fade narrowModal" id="ResultModal">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title, text-center">Результат</h4>
+				</div>
+				<div class="modal-body, text-center">
+					<label id='right'></label><br>
+					<label id ='wrong'></label><br>
+					<label id ='percent'></label>		
+					<div class="modal-footer"></div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<script src="js/jquery-1.12.1.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+		<script src="js/common.js"></script>
+	</body>
 </html>
