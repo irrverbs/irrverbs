@@ -1,6 +1,7 @@
 .main-menu{
 	position:fixed;
 	top:-100%;
+	left:5px;
 	background-color:white;
 }
 .main-menu--show{
@@ -12,12 +13,17 @@
 .animation{
 	transition-property:top;
 	transition-duration: 0.5s;
+	background-color: transparent;
 }
 
 .menu-container{
 	position:relative;
 }
-
+.menu-link{
+	display:inline-block;
+	background-color:white;
+	padding-left:1px;
+}
 .menu-label{
 	position:absolute;
 	display:block;
@@ -94,6 +100,7 @@ background-color: rgba(192, 205, 221, 0.33);
 }
 .column{
 	display:inline-block;
+	vertical-align:top;
 	width:49%;
 	padding-left:10px;
 	padding-right:10px;
